@@ -51,26 +51,26 @@ function widget_ctc_init() {
 		$showtags = $options['showtags'];
 		$empty = $options['empty'];
 ?>
-	
+
 	<div style="text-align:center">
 		<h3>Configurable Tag Cloud Options</h3>
 		<span style="line-height:15px"><br /><br /></span>
 
 		<table>
 			<tr><td><strong>Title</strong></td>
-				<td><input style="text-align:right" type="text" id="title" name="title" value="<?php echo wp_specialchars($options['title'], true); ?>" /></td>
+				<td><input style="text-align:right" type="text" id="title" name="title" value="<?php echo esc_html($options['title'], true); ?>" /></td>
 				<td style="font-size:0.75em">Title shown in sidebar.</td>
 			</tr>
 			<tr><td><strong>Number of Tags to Display</strong></td>
-				<td><input style="text-align:right" type="text" id="number" name="number" value="<?php echo wp_specialchars($options['number'], true); ?>" /></td>
+				<td><input style="text-align:right" type="text" id="number" name="number" value="<?php echo esc_html($options['number'], true); ?>" /></td>
 				<td style="font-size:0.75em">Controls the total number of tags in your cloud.</td>
 			</tr>
 			<tr><td><strong>Min. Number of Posts</strong></td>
-				<td><input style="text-align:right" type="text" id="minnum" name="minnum" value="<?php echo wp_specialchars($options['minnum'], true); ?>" /></td>
+				<td><input style="text-align:right" type="text" id="minnum" name="minnum" value="<?php echo esc_html($options['minnum'], true); ?>" /></td>
 				<td style="font-size:0.75em">Tags with less than this number of posts will not be displayed.</td>
 			</tr>
 			<tr><td><strong>Max. Number of Posts</strong></td>
-				<td><input style="text-align:right" type="text" id="maxnum" name="maxnum" value="<?php echo wp_specialchars($options['maxnum'], true); ?>" /></td>
+				<td><input style="text-align:right" type="text" id="maxnum" name="maxnum" value="<?php echo esc_html($options['maxnum'], true); ?>" /></td>
 				<td style="font-size:0.75em">Tags with more than this number of posts will not be displayed.</td>
 			</tr>
 			<tr><td><strong>Font Display Unit</strong></td>
@@ -85,19 +85,19 @@ function widget_ctc_init() {
 				<td style="font-size:0.75em">What unit to use for font sizes.</td>
 			</tr>
 			<tr><td><strong>Smallest Font Size</strong></td>
-				<td><input style="text-align:right" type="text" id="smallest" name="smallest" value="<?php echo wp_specialchars($options['smallest'], true); ?>" /></td>
+				<td><input style="text-align:right" type="text" id="smallest" name="smallest" value="<?php echo esc_html($options['smallest'], true); ?>" /></td>
 				<td style="font-size:0.75em">Tags will be displayed no smaller than this value.</td>
 			</tr>
 			<tr><td><strong>Largest Font Size</strong></td>
-				<td><input style="text-align:right" type="text" id="largest" name="largest" value="<?php echo wp_specialchars($options['largest'], true); ?>" /></td>
+				<td><input style="text-align:right" type="text" id="largest" name="largest" value="<?php echo esc_html($options['largest'], true); ?>" /></td>
 				<td style="font-size:0.75em">Tags will be displayed no larger that this value.</td>
 			</tr>
 			<tr><td><strong>Min. Tag Color</strong></td>
-				<td><input style="text-align:right" type="text" id="mincolor" name="mincolor" value="<?php echo wp_specialchars($options['mincolor'], true); ?>" /></td>
+				<td><input style="text-align:right" type="text" id="mincolor" name="mincolor" value="<?php echo esc_html($options['mincolor'], true); ?>" /></td>
 				<td style="font-size:0.75em">Beginning color for tag gradient.  Please include the #.</td>
 			</tr>
 			<tr><td><strong>Max. Tag Color</strong></td>
-				<td><input style="text-align:right" type="text" id="maxcolor" name="maxcolor" value="<?php echo wp_specialchars($options['maxcolor'], true); ?>" /></td>
+				<td><input style="text-align:right" type="text" id="maxcolor" name="maxcolor" value="<?php echo esc_html($options['maxcolor'], true); ?>" /></td>
 				<td style="font-size:0.75em">Ending color for tag gradient.  Please include the #.</td>
 			</tr>
 			<tr><td><strong>Cloud Format</strong></td>
@@ -188,7 +188,7 @@ function widget_ctc_init() {
 	// Tell Dynamic Sidebar about our new widget and its control
 	register_sidebar_widget(array('CTC', 'widgets'), 'widget_ctc');
 	register_widget_control(array('CTC', 'widgets'), 'widget_ctc_control', 520, 510);
-	
+
 }
 
 // Delay plugin execution to ensure Dynamic Sidebar has a chance to load first

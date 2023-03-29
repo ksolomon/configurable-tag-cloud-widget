@@ -9,15 +9,16 @@ function CTC_load() {
 }
 
 class CTC_Widget extends WP_Widget {
-	function CTC_Widget() {
+	function __construct() {
 		/* Widget settings. */
-		$widget_ops = array('classname' => 'ctc', 'description' => __("Customizable cloud of your blog's tags."));
+		$widget_ops = array('name' => 'Configurable Tag Cloud','classname' => 'ctc', 'description' => __("Customizable cloud of your blog's tags."));
 
 		/* Widget control settings. */
 		$control_ops = array('width' => 420, 'height' => 510, 'id_base' => 'ctc');
 
 		/* Create the widget. */
-		$this->WP_Widget('CTC', __('CTC'), $widget_ops, $control_ops);
+		// $this->WP_Widget('CTC', __('CTC'), $widget_ops, $control_ops);
+		parent::__construct('CTC_Widget', 'Configuarble Tag Cloud', $widget_ops, $control_ops);
 		$this->alt_option_name = 'widget_ctc';
 	}
 

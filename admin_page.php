@@ -1,9 +1,14 @@
 <?php
 // Displays the page content for the CTC Admin Submenu
 function ctc_options_page() {
-	// variables for the field and option names 
+	// variables for the field and option names
 	$options = $newoptions = get_option('template_ctc');
 	if ($_POST['ctc-submit']) {
+		if (!wp_verify_nonce($_POST['ctc_options'],'ctc_save')) {
+			echo '<h1>Invalid nonce!</h1>';
+			exit;
+		}
+
 		$newoptions['number'] = (int) $_POST['ctc-number'];
 		$newoptions['minnum'] = (int) $_POST['ctc-minnum'];
 		$newoptions['maxnum'] = (int) $_POST['ctc-maxnum'];
@@ -53,18 +58,18 @@ function ctc_options_page() {
 	// options form
 ?>
 		<form method="post" action="<?php echo str_replace('%7E','~',$_SERVER['REQUEST_URI']); ?>">
-			<?php wp_nonce_field('update-options') ?>
+			<?php wp_nonce_field('ctc_save','ctc_options') ?>
 			<table>
 				<tr><td><strong>Number of Tags to Display</strong></td>
-					<td><input style="text-align:right" type="text" id="ctc-number" name="ctc-number" value="<?php echo wp_specialchars($options['number'], true); ?>" /></td>
+					<td><input style="text-align:right" type="text" id="ctc-number" name="ctc-number" value="<?php echo esc_html($options['number'], true); ?>" /></td>
 					<td style="font-size:0.75em">Controls the total number of tags in your cloud.</td>
 				</tr>
 				<tr><td><strong>Min. Number of Posts</strong></td>
-					<td><input style="text-align:right" type="text" id="ctc-minnum" name="ctc-minnum" value="<?php echo wp_specialchars($options['minnum'], true); ?>" /></td>
+					<td><input style="text-align:right" type="text" id="ctc-minnum" name="ctc-minnum" value="<?php echo esc_html($options['minnum'], true); ?>" /></td>
 					<td style="font-size:0.75em">Tags with less than this number of posts will not be displayed.</td>
 				</tr>
 				<tr><td><strong>Max. Number of Posts</strong></td>
-					<td><input style="text-align:right" type="text" id="ctc-maxnum" name="ctc-maxnum" value="<?php echo wp_specialchars($options['maxnum'], true); ?>" /></td>
+					<td><input style="text-align:right" type="text" id="ctc-maxnum" name="ctc-maxnum" value="<?php echo esc_html($options['maxnum'], true); ?>" /></td>
 					<td style="font-size:0.75em">Tags with more than this number of posts will not be displayed.</td>
 				</tr>
 				<tr><td><strong>Font Display Unit</strong></td>
@@ -79,19 +84,19 @@ function ctc_options_page() {
 					<td style="font-size:0.75em">What unit to use for font sizes.</td>
 				</tr>
 				<tr><td><strong>Smallest Font Size</strong></td>
-					<td><input style="text-align:right" type="text" id="ctc-smallest" name="ctc-smallest" value="<?php echo wp_specialchars($options['smallest'], true); ?>" /></td>
+					<td><input style="text-align:right" type="text" id="ctc-smallest" name="ctc-smallest" value="<?php echo esc_html($options['smallest'], true); ?>" /></td>
 					<td style="font-size:0.75em">Tags will be displayed no smaller than this value.</td>
 				</tr>
 				<tr><td><strong>Largest Font Size</strong></td>
-					<td><input style="text-align:right" type="text" id="ctc-largest" name="ctc-largest" value="<?php echo wp_specialchars($options['largest'], true); ?>" /></td>
+					<td><input style="text-align:right" type="text" id="ctc-largest" name="ctc-largest" value="<?php echo esc_html($options['largest'], true); ?>" /></td>
 					<td style="font-size:0.75em">Tags will be displayed no larger that this value.</td>
 				</tr>
 				<tr><td><strong>Min. Tag Color</strong></td>
-					<td><input style="text-align:right" type="text" id="ctc-mincolor" name="ctc-mincolor" value="<?php echo wp_specialchars($options['mincolor'], true); ?>" /></td>
+					<td><input style="text-align:right" type="text" id="ctc-mincolor" name="ctc-mincolor" value="<?php echo esc_html($options['mincolor'], true); ?>" /></td>
 					<td style="font-size:0.75em">Beginning color for tag gradient.  Please include the #.</td>
 				</tr>
 				<tr><td><strong>Max. Tag Color</strong></td>
-					<td><input style="text-align:right" type="text" id="ctc-maxcolor" name="ctc-maxcolor" value="<?php echo wp_specialchars($options['maxcolor'], true); ?>" /></td>
+					<td><input style="text-align:right" type="text" id="ctc-maxcolor" name="ctc-maxcolor" value="<?php echo esc_html($options['maxcolor'], true); ?>" /></td>
 					<td style="font-size:0.75em">Ending color for tag gradient.  Please include the #.</td>
 				</tr>
 				<tr><td><strong>Cloud Format</strong></td>

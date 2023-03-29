@@ -4,7 +4,7 @@ Plugin Name: Configurable Tag Cloud
 Plugin URI: http://keithsolomon.net/ctc/
 Description: A tag cloud plugin for WordPress to give you more flexibility with the styling of your tag cloud.
 Author: Keith Solomon
-Version: 5.2
+Version: 5.3
 Author URI: http://keithsolomon.net/
 
 	Copyright (c) 2009 Keith Solomon (http://keithsolomon.net)

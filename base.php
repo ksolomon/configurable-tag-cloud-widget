@@ -56,7 +56,7 @@ function ColorWeight($weight, $mincolor, $maxcolor) {
 
 		$color = "#$r$g$b";
 		$color = substr($color,0,7);
-		
+
 		return $color;
 	}
 }
@@ -71,7 +71,7 @@ function ctc_get_tags($args = '') {
 	foreach ($alltags as $tag) {
 		if ($tag->count < $minnum || $tag->count > $maxnum)
 			continue;
-			
+
 		array_push($tags, $tag);
 	}
 
@@ -92,7 +92,7 @@ function wdgt_ctc($args = '') {
 		'exclude' => '', 'include' => '', 'mincolor' => '', 'maxcolor' => '', 'showcount' => 'no',
 		'showtags' => 'yes', 'showcats' => 'no', 'empty' => 'no', 'widget' => 'yes'
 	);
-	
+
 	$options = get_option('widget_ctc');
 
 	$args = wp_parse_args($args, $options, $defaults);
@@ -116,14 +116,14 @@ function wdgt_ctc($args = '') {
 		}
 
 		$hide_empty = '&hide_empty='.$empty;
-		
+
 		$cats = get_categories("show_count=1&use_desc_for_title=0&hierarchical=0$hide_empty");
 
 		$tagscats = array_merge($tags, $cats);
 	} else {
 		$tagscats = array_merge($tags);
 	}
-	
+
 	if (empty($tagscats))
 		return;
 
@@ -145,7 +145,7 @@ function ctc($args = '') {
 		'exclude' => '', 'include' => '', 'mincolor' => '', 'maxcolor' => '', 'showcount' => 'no',
 		'showtags' => 'yes', 'showcats' => 'no', 'empty' => 'no', 'widget' => 'no'
 	);
-	
+
 	$options = get_option('template_ctc');
 
 	$args = wp_parse_args($args, $options, $defaults);
@@ -169,14 +169,14 @@ function ctc($args = '') {
 		}
 
 		$hide_empty = '&hide_empty='.$empty;
-		
+
 		$cats = get_categories("show_count=1&use_desc_for_title=0&hierarchical=0$hide_empty");
 
 		$tagscats = array_merge($tags, $cats);
 	} else {
 		$tagscats = array_merge($tags);
 	}
-	
+
 	if (empty($tagscats))
 		return;
 
@@ -269,16 +269,16 @@ function generate_tag_cloud($tagscats, $args = '') {
 		$color_weight = round(99*($tag_weight-$smallest)/($diff)+1);
 		$tag_color = ColorWeight($color_weight, $mincolor, $maxcolor);
 		$tag_id = $tag_ids[$tag];
-		$tag_link = clean_url($tag_links[$tag]);
-		$tag = wp_specialchars($tag);
+		$tag_link = esc_url($tag_links[$tag]);
+		$tag = esc_html($tag);
 		if ($format=='list') {
-			$a[] = "<li class=\"ctc-tag-li\"><a href=\"$tag_link\" class=\"ctc-tag tag-link-$tag_id\" title=\"".attribute_escape(sprintf(__('%d topics'), $count))."\"$rel style=\"font-size: ".$tag_weight
+			$a[] = "<li class=\"ctc-tag-li\"><a href=\"$tag_link\" class=\"ctc-tag tag-link-$tag_id\" title=\"".esc_attr(sprintf(__('%d topics'), $count))."\"$rel style=\"font-size: ".$tag_weight
 				."$unit;".(isset($tag_color) ? " color: $tag_color;" : "")
 				."\">$tag</a>".('yes' == $showcount ? " $postcount" : "")."</li>";
 		} elseif ($format=='drop') {
 			$a[] = "<option value='$tag_link'>$tag".('yes' == $showcount ? " $postcount" : "")."</option>";
 		} else {
-			$a[] = "<a href=\"$tag_link\" class=\"ctc-tag tag-link-$tag_id\" title=\"".attribute_escape(sprintf(__('%d topics'), $count))."\"$rel style=\"font-size: ".$tag_weight
+			$a[] = "<a href=\"$tag_link\" class=\"ctc-tag tag-link-$tag_id\" title=\"".esc_attr(sprintf(__('%d topics'), $count))."\"$rel style=\"font-size: ".$tag_weight
 				."$unit;".(isset($tag_color) ? " color: $tag_color;" : "")
 				."\">$tag"."</a>".('yes' == $showcount ? " $postcount" : "");
 		}
